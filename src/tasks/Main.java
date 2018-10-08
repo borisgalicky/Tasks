@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -217,7 +218,7 @@ public class Main {
             System.out.println("Match! You guessed number "+num+"!");
         } else {
             System.out.println("Sorry! You didn't guessed number!");
-        }*/
+        }
         
         List<Integer> list = new ArrayList();
         for (int i=0;i<10;i++) {
@@ -232,7 +233,7 @@ public class Main {
                 .map(n -> n * n)
                 .collect(Collectors.toList());
 
-        long i = list.stream().filter(n -> n % 2 == 0).count();
+        int i = list.stream().filter(n -> n % 2 == 0).count();
         Optional<Integer> j = list.stream().findFirst();
 
         IntSummaryStatistics stat =list.stream()
@@ -248,9 +249,121 @@ public class Main {
         
         System.out.println("\nResult: "+result);
         System.out.println("Count of even (divadable by two): " + i);
-        System.out.println("First number: " + result.get(0));
-
-
-
+        System.out.println("First number: " + j);
+        
+        mainOperations add = (x,y) -> (int) (x+y);
+        mainOperations subtract = (x,y) -> (int) (x-y);
+        mainOperations multiple = (x,y) -> (int) (x*y);
+        mainOperations divide = (x,y) -> (int) (x/y);
+        otherOperations secondPow = (x) -> (int) (Math.pow(x,2));
+        otherOperations thirdPow  = (x) -> (int) (Math.pow(x,3));
+        otherOperations absoluteValue = (x) -> {
+            if(x<0){
+                return (int) (x*(-1));
+            }
+            else{
+                return (int) (x);
+            }
+        };
+        
+        System.out.println("1 - Add\n2 - Subtract\n3 - Multiple\n4 - Divide\n"
+                + "5 - Second Power\n6 - Third Power\n7 - Absolute Value");
+        System.out.println("Enter operation: ");
+        Scanner s = new Scanner(System.in);
+        int operations = s.nextInt();
+        
+        switch(operations){
+            case 1: 
+                Scanner s1 = new Scanner(System.in);
+                System.out.println("Enter first number:");
+                int num1_1 = s1.nextInt();
+                System.out.println("Enter second number:");
+                int num2_1 = s1.nextInt();
+                System.out.println("Result: "+add.calculate(num1_1,num2_1));
+                break;
+                
+            case 2: 
+                Scanner s2 = new Scanner(System.in);
+                System.out.println("Enter first number:");
+                int num1_2 = s2.nextInt();
+                System.out.println("Enter second number:");
+                int num2_2 = s2.nextInt();
+                System.out.println("Result: "+subtract.calculate(num1_2,num2_2));
+                break;
+                
+            case 3: 
+                Scanner s3 = new Scanner(System.in);
+                System.out.println("Enter first number:");
+                int num1_3 = s3.nextInt();
+                System.out.println("Enter second number:");
+                int num2_3 = s3.nextInt();
+                System.out.println("Result: "+multiple.calculate(num1_3,num2_3));
+                break;
+              
+            case 4: 
+                Scanner s4 = new Scanner(System.in);
+                System.out.println("Enter first number:");
+                int num1_4 = s4.nextInt();
+                System.out.println("Enter second number:");
+                int num2_4 = s4.nextInt();
+                System.out.println("Result: "+divide.calculate(num1_4,num2_4));
+                break;
+                
+            case 5: 
+                Scanner s5 = new Scanner(System.in);
+                System.out.println("Enter number:");
+                int num5 = s5.nextInt();
+                System.out.println("Result: "+secondPow.calculate(num5));
+                break;
+                
+            case 6: 
+                Scanner s6 = new Scanner(System.in);
+                System.out.println("Enter number:");
+                int num6 = s6.nextInt();
+                System.out.println("Result: "+thirdPow.calculate(num6));
+                break;
+                
+            case 7:
+                Scanner s7 = new Scanner(System.in);
+                System.out.println("Enter number:");
+                int num7 = s7.nextInt();
+                System.out.println("Result: "+absoluteValue.calculate(num7));
+                break;
+                
+            default: System.out.println("No such operation!"); 
+            break;
+        }
+        Scanner s = new Scanner (System.in);
+        double num = s.nextDouble();
+        volumeInterface volumeCircle = (x) -> (double) ((Math.PI)*(Math.pow(x, 2)));
+        System.out.println(volumeCircle.calculate(num));*/
+        
+        Scanner s = new Scanner (System.in);
+        int num = s.nextInt();
+        isEvenInterafce isEven = (x) -> {
+            if(x%2 == 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        };
+        System.out.println(isEven.findOut(num));
+        
     }
+}
+interface isEvenInterafce{
+    boolean findOut (int x);
+}
+
+interface volumeInterface{
+    double calculate (double x);
+}
+
+interface otherOperations{
+    int calculate (int x);
+}
+
+interface mainOperations{
+    int calculate (int x, int y);
 }

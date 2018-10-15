@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
@@ -336,7 +337,7 @@ public class Main {
         Scanner s = new Scanner (System.in);
         double num = s.nextDouble();
         volumeInterface volumeCircle = (x) -> (double) ((Math.PI)*(Math.pow(x, 2)));
-        System.out.println(volumeCircle.calculate(num));*/
+        System.out.println(volumeCircle.calculate(num));
         
         Scanner s = new Scanner (System.in);
         int num = s.nextInt();
@@ -349,6 +350,32 @@ public class Main {
             }
         };
         System.out.println(isEven.findOut(num));
+        
+        List<Integer> numbers = Arrays.asList(10,2,8,12,15);
+        List<Integer> n = numbers.stream()
+                .map(x->x*x)
+                .collect(Collectors.toList());
+                System.out.println(n);
+                
+        List<String> letters = new ArrayList<>();
+        System.out.println("Enter five letters:");
+        Scanner sc = new Scanner(System.in);
+        for(int i=0;i<5;i++){
+            String letter = sc.nextLine();
+            letters.add(letter);
+        }
+        //letters = Arrays.asList("a","b","c","d","e");
+        List<String> list = letters.stream()
+                .map(t->t.toUpperCase())
+                .collect(Collectors.toList());
+                System.out.println(list);*/
+        
+        List<String> letters1 = new ArrayList<String>(Arrays.asList("a", "b", "c"));
+        List<String> letters2 = new ArrayList<String>(Arrays.asList("d", "e", "f"));
+        System.out.println("First: "+letters1);
+        System.out.println("Second: "+letters2);
+        letters1.addAll(letters2);
+        System.out.println("Joined: "+letters1);
         
     }
 }
